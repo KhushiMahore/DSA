@@ -21,10 +21,8 @@ public:
         while (even != nullptr && even->next != nullptr) {
             odd->next = even->next;
             odd = even->next;
-            if (odd != nullptr) {
-                even->next = odd->next;
-                even = odd->next;
-            }
+            even->next = odd->next;
+            even = odd->next;
         }
         odd->next = evenhead;
         return head;
