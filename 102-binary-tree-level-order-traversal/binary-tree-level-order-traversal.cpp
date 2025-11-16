@@ -17,6 +17,7 @@ public:
         vector<vector<int>> ans;
         if (root == nullptr)
             return ans;
+        ans.push_back({ root->val });
         q.push(root);
         while (!q.empty()) {
             int size = q.size();
@@ -24,14 +25,17 @@ public:
             for (int i = 0; i < size; i++) {
                 TreeNode* temp = q.front();
                 q.pop();
-                level.push_back(temp->val);
+
                 if (temp->left != nullptr) {
                     q.push(temp->left);
+                    level.push_back(temp->left->val);
                 }
                 if (temp->right != nullptr) {
                     q.push(temp->right);
+                    level.push_back(temp->right->val);
                 }
             }
+            if(level.size()!=0)
             ans.push_back(level);
         }
         return ans;
