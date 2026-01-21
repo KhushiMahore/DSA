@@ -1,23 +1,18 @@
 class Solution {
 public:
-    void sub(vector<int>& nums, int index, vector<int> current,
-                vector<vector<int>>& result) {
-        if (index == nums.size()) {
-            result.push_back(current);
-            return;
+  vector<vector<int>> ans;
+
+    void power(int s, vector<int>& nums, vector<int>& temp) {
+        ans.push_back(temp);
+        for (int i = s; i < nums.size(); i++) {
+            temp.push_back(nums[i]);
+            power(i + 1, nums, temp);
+            temp.pop_back();
         }
-        sub(nums, index + 1, current, result);
-        current.push_back(nums[index]);
-
-        sub(nums, index + 1, current, result);
-        current.pop_back();
     }
-
     vector<vector<int>> subsets(vector<int>& nums) {
-        vector<vector<int>> result;
-        vector<int> current;
-
-        sub(nums, 0, current, result);
-        return result;
+        vector<int> temp;
+        power(0, nums, temp);
+        return ans;
     }
 };
