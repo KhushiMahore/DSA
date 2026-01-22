@@ -1,29 +1,25 @@
 class Solution {
 public:
     vector<vector<int>> ans;
-
-    void helper(int i, vector<int>& c, int target, vector<int>& cur) {
-       
+    vector<int> temp;
+    void power(vector<int>& candidates, int target, int i) {
         if (target == 0) {
-            ans.push_back(cur);
+            ans.push_back(temp);
             return;
+        }  if (i == candidates.size()) {
+            return;
+        } else {
+            if (candidates[i] <= target) {
+                temp.push_back(candidates[i]);
+                power(candidates, target - candidates[i], i);
+                temp.pop_back();
+               
+            }
+             power(candidates, target , i + 1);
         }
-
-      
-        if (i == c.size() || target < 0)
-            return;
-
-        cur.push_back(c[i]);
-        helper(i, c, target - c[i], cur);
-        cur.pop_back();   
-
-        
-        helper(i + 1, c, target, cur);
     }
-
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
-        vector<int> cur;
-        helper(0, candidates, target, cur);
+        power(candidates, target, 0);
         return ans;
     }
 };
