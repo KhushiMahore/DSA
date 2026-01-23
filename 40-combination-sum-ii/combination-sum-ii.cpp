@@ -10,6 +10,8 @@ public:
         }
 
         for (int j = i; j < candidates.size(); j++) {
+
+            // 🔥 skip duplicates
             if (j > i && candidates[j] == candidates[j - 1])
                 continue;
 
